@@ -1,0 +1,49 @@
+import { useState, useEffect } from 'react'
+// ... existing imports ...
+
+export default function LandingPage() {
+  const [email, setEmail] = useState('')
+  const [animatedText, setAnimatedText] = useState('')
+
+  useEffect(() => {
+    const text = "Powering the Future of Deep Tech";
+    let i = 0;
+    const intervalId = setInterval(() => {
+      if (i < text.length) {
+        setAnimatedText((prev) => prev + text[i]);
+        i++;
+      } else {
+        clearInterval(intervalId);
+      }
+    }, 100);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  // ... existing code ...
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* ... existing header ... */}
+      <main className="flex-1">
+        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-black text-white">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none animate-fade-in">
+                  {animatedText}
+                </h1>
+                {/* ... existing paragraph ... */}
+              </div>
+              <div className="space-x-4 animate-bounce">
+                {/* ... existing buttons ... */}
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* ... rest of the sections ... */}
+      </main>
+      {/* ... existing footer ... */}
+    </div>
+  )
+}
